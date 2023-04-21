@@ -11,6 +11,7 @@ import { View,
 import { Header, PlantCard, Chips } from "../../components";
 /** Plugin */
 import { useNavigation } from "@react-navigation/native";
+import { PanGestureHandler } from "react-native-gesture-handler";
 
 /** Constants */
 import { PLANT_TYPES } from "../../../_constants/constants";
@@ -19,6 +20,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { DashboardActions} from "../../../_actions/dashboard.actions";
 /** Styling */
 import { dashboard_styles } from "./dashboard.style";
+import { COLORS } from "../../../_constants/constants.styles";
 
 const Dashboard = () => {
     const navigation = useNavigation();
@@ -53,6 +55,7 @@ const Dashboard = () => {
                     showsHorizontalScrollIndicator={false}
                     contentContainerStyle={plant_card_carousel_view}
                 />
+        
             </View>
         </View>
     )

@@ -8,7 +8,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { SafeAreaView } from "react-native";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
-import { gestureHandlerRootHOC } from "react-native-gesture-handler";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 /** Screens */
 import { Cart, Dashboard, Plant } from "./src/views/screens";
 /** Styling */
@@ -38,16 +38,18 @@ export default function App() {
 
     return (
         <Provider store={Store}>
-            <SafeAreaView style={SAFE_AREA_VIEW.main_flex}>
+            <GestureHandlerRootView style={{ flex: 1}} >
                 <NavigationContainer onLayoutRootView={onLayoutRootView}>
                     {/* Screens */}
-                    <Stack.Navigator initialRouteName="Dashboard">
-                        <Stack.Screen name="Dashboard" component={Dashboard}/>
-                        <Stack.Screen name="Plant" component={Plant}/>
-                        <Stack.Screen name="Cart" component={Cart}/>
-                    </Stack.Navigator>
+                    <SafeAreaView style={SAFE_AREA_VIEW.main_flex}>
+                        <Stack.Navigator initialRouteName="Dashboard">
+                            <Stack.Screen name="Dashboard" component={Dashboard}/>
+                            <Stack.Screen name="Plant" component={Plant}/>
+                            <Stack.Screen name="Cart" component={Cart}/>
+                        </Stack.Navigator>
+                    </SafeAreaView>
                 </NavigationContainer>
-            </SafeAreaView>
+            </GestureHandlerRootView>
         </Provider>
     );
 }
