@@ -23,6 +23,8 @@ export default function App() {
         "Satoshi-Regular": require("./assets/fonts/Satoshi-Regular.ttf"),
         "Config-Regular": require("./assets/fonts/Config-Regular.otf"),
         "Config-Semibold": require("./assets/fonts/Config-Semibold.otf"),
+        "Satoshi-Bold": require("./assets/fonts/Satoshi-Bold.otf"),
+        "Satoshi-Italic": require("./assets/fonts/Satoshi-Italic.otf"),
     });
     
     const onLayoutRootView = useCallback(async () => {

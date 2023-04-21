@@ -2,19 +2,19 @@ import { StyleSheet, Platform } from "react-native";
 import { COLORS, FONT } from "../../../_constants/constants.styles";
 
 export const header_styles = StyleSheet.create({
-    header_container: {
+    header_container: (screen) => ( {
         alignItems: "center", 
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: 24,
         paddingTop: 25,
-        backgroundColor: COLORS.secondary,
-    }, 
+        backgroundColor: screen === "dashboard"? COLORS.secondary : COLORS.white,
+    }), 
     header_title: {
         flexWrap: "wrap",
         fontFamily: FONT.satoshi_regular,
         fontSize: 32,
-        width: Platform.OS === "ios"? 250 : 200,
+        width: Platform.OS === "ios"? 280 : 250,
     },
     header_bold: {
         fontFamily: FONT.satoshi_semi_bold,

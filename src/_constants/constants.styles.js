@@ -11,6 +11,8 @@ const COLORS = {
 const FONT = {
     satoshi_regular: "Satoshi-Regular",
     satoshi_semi_bold: "Satoshi-Medium",
+    satoshi_bold: "Satoshi-Bold",
+    satoshi_italic: "Satoshi-Italic",
     config_regular: "Config-Regular",
     config_semibold: "Config-Semibold",
 }

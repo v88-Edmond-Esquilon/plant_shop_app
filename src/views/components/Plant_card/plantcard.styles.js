@@ -28,7 +28,7 @@ export const plant_card_styling = StyleSheet.create({
     image: {
         height: Platform.OS === "ios" ? 240 : 210,   
         resizeMode: "cover",
-        width: 200,
+        width: 250,
     },
     item_name: {
         fontFamily: FONT.satoshi_regular,
@@ -55,6 +55,5 @@ export const plant_card_styling = StyleSheet.create({
         fontFamily: FONT.satoshi_regular,
         fontSize: 18,
     }
-
 });
   

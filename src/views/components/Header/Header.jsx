@@ -6,15 +6,15 @@ import { useFonts } from "expo-font";
 import { Bars3Icon } from "react-native-heroicons/outline";
 
 
-const Header = ({ title, higlighted_text }) => {
+const Header = ({ title, screen }) => {
     const { header_container, header_title, header_bold, burger_btn} = header_styles;
-
+   
     return (
-        <View style={header_container}>
+        <View style={header_container(screen)}>
             <Text style={header_title}>
-                {title}
+                {screen === "dashboard"? "Let's Make our\nlives" : "The Potted"} 
                 <Text style={header_bold}>
-                    {higlighted_text}
+                    {screen === "dashboard"? " Greener" : `\n${title}`} 
                 </Text>
             </Text>
             <Pressable android_ripple={{ color: COLORS.primary }} style={burger_btn}>
