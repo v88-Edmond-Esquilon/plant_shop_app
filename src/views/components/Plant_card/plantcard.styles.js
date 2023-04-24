@@ -15,7 +15,8 @@ export const plant_card_styling = StyleSheet.create({
         shadowOffset: { width: 0, height: 2 }, // for iOS
         shadowOpacity: 0.25, // for iOS
         shadowRadius: 5.84, // for iOS
-        width: Platform.OS === "ios" ? 325 : 250,
+        width: Platform.OS === "ios" ? 275 : 250,
+        marginHorizontal: 30
     },
     image_container:{
         alignItems: "center",
@@ -23,11 +24,11 @@ export const plant_card_styling = StyleSheet.create({
         borderRadius: 23,
         height: Platform.OS === "ios" ? 250 : 210,
         justifyContent: "flex-end",
-        width: Platform.OS === "ios" ? 280 : 210,
+        width: Platform.OS === "ios" ? 240 : 210,
     },
     image: {
         height: Platform.OS === "ios" ? 240 : 210,   
-        resizeMode: "cover",
+        resizeMode: "center",
         width: 250,
     },
     item_name: {

@@ -29,7 +29,7 @@ export const plant_styling = StyleSheet.create({
 
     },
     plant_image: {
-        width: 250,
+        width: 280,
         height: 280,
         position: "absolute",
         top: "9%",
@@ -40,8 +40,18 @@ export const plant_styling = StyleSheet.create({
         width: 300,
         fontFamily: FONT.satoshi_italic,
         color: "#8B8B8B",
+        marginTop: Platform.OS === "ios"? 130 : 150
     },
     controls_container: {
+     
+        borderWidth: 1,
+        borderColor: "black",
+     
+        alignItems: "center",
+        justifyContent: "space-between",
+        height: 220
+    },
+    quantity_text: {
 
     }
 });

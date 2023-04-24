@@ -19,31 +19,5 @@ export const dashboard_styles = StyleSheet.create({
     plant_card_carousel_view:{
         paddingBottom: 25,
     },
-    footer_cart_slider:{
-        width: "100%",
-        borderWidth: 1,
-        borderColor: 'black',
-        flexDirection: "row",
-        justifyContent:"space-between",
-    },
-    footer_rounded_container_left:{
-        backgroundColor: COLORS.primary,
-        width: 140,
-        height: 130,
-        borderTopLeftRadius: 50,
-        borderTopRightRadius: 10,
-    },
-    middle_notch: {
-        backgroundColor: COLORS.primary,
-        width: 90,
-        height: 70,
-        marginTop: 40,
-    },
-    footer_rounded_container_right: {
-        backgroundColor: COLORS.primary,
-        width: 140,
-        height: 130,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 50,
-    }
+
 });

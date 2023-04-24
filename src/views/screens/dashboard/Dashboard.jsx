@@ -1,6 +1,6 @@
 
 /** React */
-import React, { useLayoutEffect } from "react";
+import React, { useLayoutEffect, useRef, useState } from "react";
 /** React Native */
 import { View,
         Text,
@@ -8,7 +8,7 @@ import { View,
         FlatList,
     } from "react-native";
 /** Components */
-import { Header, PlantCard, Chips } from "../../components";
+import { Header, PlantCard, Chips, DashboardFooter } from "../../components";
 /** Plugin */
 import { useNavigation } from "@react-navigation/native";
 import { PanGestureHandler } from "react-native-gesture-handler";
@@ -20,20 +20,23 @@ import { useSelector, useDispatch } from "react-redux";
 import { DashboardActions} from "../../../_actions/dashboard.actions";
 /** Styling */
 import { dashboard_styles } from "./dashboard.style";
-import { COLORS } from "../../../_constants/constants.styles";
 
 const Dashboard = () => {
     const navigation = useNavigation();
-    const { dashboard: { selected_plant_type}} = useSelector(state => state);
+    const { dashboard: { selected_plant_type }} = useSelector(state => state);
     const { dashboard_container, chips_scroll_container, collections_text,
-            plant_card_carousel_view, footer_rounded_container_left, footer_cart_slider,
-            footer_rounded_container_right, middle_notch } = dashboard_styles;
+            plant_card_carousel_view, } = dashboard_styles;
+    
 
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false
         }); 
-    }, []);  
+    }, []); 
+    
+
+      
+
 
     return (
         <View>
@@ -58,18 +61,11 @@ const Dashboard = () => {
                     contentContainerStyle={plant_card_carousel_view}
                 />
                 <PanGestureHandler>
-                    <Animatable.View style={footer_cart_slider}>
-                        <View style={footer_rounded_container_left}>
-
-                        </View>
-                        <View style={middle_notch}>
-
-                        </View>
-                        <View style={footer_rounded_container_right}>
-
-                        </View>
+                    <Animatable.View >
+                        <DashboardFooter/>
                     </Animatable.View>
                 </PanGestureHandler>
+                
             </View>
         </View>
     )

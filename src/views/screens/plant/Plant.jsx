@@ -1,5 +1,6 @@
 /** React Native */
 import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
+import { Svg, Path } from "react-native-svg";
 /** React */
 import React,{ useEffect, useLayoutEffect, useState } from "react";
 /** Plugin */
@@ -19,7 +20,9 @@ const Plant = () => {
 
     const { plant: { selected_plant }} = useSelector(state => state);
     const { item, quantity, plant_type} = selected_plant;
-    const { content_container, plant_type_text, image_container, plant_image, item_description, controls_container } = plant_styling;
+    const { content_container, plant_type_text,image_container,
+         plant_image, item_description, controls_container,
+         quantity_text, } = plant_styling;
     
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -42,18 +45,14 @@ const Plant = () => {
                         {item.description}
                 </Text>
                 <View style={controls_container}>
+                    <Image
+                        source={require("../../../../assets/custom_containers/decrement.svg")}
+                    />
+                    <Text style={quantity_text}>
+                        {quantity}
+                    </Text>
                     <View>
-                        <TouchableOpacity>
-
-                        </TouchableOpacity>
-                    </View>
-                    <View>
-                        <Text>{quantity}</Text>
-                    </View>
-                    <View>
-                        <TouchableOpacity>
-                            
-                        </TouchableOpacity>
+                
                     </View>
                 </View>
             </View>
