@@ -44,7 +44,38 @@ const PLANT_TYPES = [
     }
 ];
 
+const slider_animation = {
+    0: {
+        opacity: 0,
+        transform: [{ translateX: -20 }]
+    },
+    0.25: {
+        opacity: 1,
+        transform: [{ translateX: 0 }]
+    },
+    0.5: {
+        opacity: 0
+    },
+    0.75: {
+        opacity: 1,
+        transform: [{ translateX: 15 }]
+    },
+    1: {
+        opacity: 0,
+        transform: [{ translateX: 20 }]
+    }
+};
+
+const cart_content_path = require("../../assets/custom_containers/cart_content.png");
+const cart_controls_path = require("../../assets/custom_containers/cart_controls.png");
+const increment_container_path = require("../../assets/custom_containers/increment.png");
+const decrement_container_path = require("../../assets/custom_containers/decrement.png");
     
 export {
-    PLANT_TYPES
+    PLANT_TYPES,
+    slider_animation,
+    cart_content_path,
+    cart_controls_path,
+    increment_container_path,
+    decrement_container_path
 };

@@ -1,4 +1,4 @@
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, TouchableOpacity } from "react-native";
 import React from "react";
 import { header_styles } from "./header.styles";
 import { COLORS } from "../../../_constants/constants.styles";
@@ -17,9 +17,9 @@ const Header = ({ title, screen }) => {
                     {screen === "dashboard"? " Greener" : `\n${title}`} 
                 </Text>
             </Text>
-            <Pressable android_ripple={{ color: COLORS.primary }} style={burger_btn}>
+            <TouchableOpacity style={burger_btn}>
                 <Bars3Icon width={24} height={24} color="#105D5C"/>
-            </Pressable>
+            </TouchableOpacity>
         </View>
     )
 }

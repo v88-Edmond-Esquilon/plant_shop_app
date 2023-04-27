@@ -1,36 +1,41 @@
 /** React Native */
-import { View, Text, Image, Dimensions, TouchableOpacity } from "react-native";
+import { View, Text, ImageBackground, Dimensions, Image, TouchableOpacity } from "react-native";
 import { Svg, Path } from "react-native-svg";
 /** React */
 import React,{ useEffect, useLayoutEffect, useState } from "react";
 /** Plugin */
 import { useNavigation } from "@react-navigation/native";
 import { LinearGradient } from 'expo-linear-gradient';
+import { ShoppingCartIcon } from "react-native-heroicons/outline";
 /** Component */
 import { Header } from "../../components";
+/** Constants */
+import { increment_container_path, decrement_container_path } from "../../../_constants/constants";
 /** Redux */
 import { useSelector, useDispatch } from "react-redux";
 /** Styling */
 import { plant_styling } from "./plant.styles";
-import { COLORS } from "../../../_constants/constants.styles";
+import { COLORS, FONT } from "../../../_constants/constants.styles";
+
+
+const { content_container, plant_type_text,image_container,
+        plant_image, item_description, controls_container,
+        quantity_text, increment_container, decrement_container,
+        increment_btn_text, decrement_btn_text, add_to_cart_btn,
+        cart_icon, add_cart_btn_text, add_cart_btn_price
+    } = plant_styling;
 
 const Plant = () => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
-
     const { plant: { selected_plant }} = useSelector(state => state);
     const { item, quantity, plant_type} = selected_plant;
-    const { content_container, plant_type_text,image_container,
-         plant_image, item_description, controls_container,
-         quantity_text, } = plant_styling;
     
     useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false,
         });
     }, []);
-
-
 
     return (
         <View style={{ flex: 1}}>
@@ -45,16 +50,33 @@ const Plant = () => {
                         {item.description}
                 </Text>
                 <View style={controls_container}>
-                    <Image
-                        source={require("../../../../assets/custom_containers/decrement.svg")}
-                    />
+                    <ImageBackground
+                        source={decrement_container_path}
+                        style={decrement_container}
+                    >
+                        <TouchableOpacity>
+                            <Text style={decrement_btn_text}>_</Text>
+                        </TouchableOpacity>
+                    </ImageBackground>
                     <Text style={quantity_text}>
-                        {quantity}
+                        {quantity.toString().padStart(2, '0')}
                     </Text>
-                    <View>
-                
-                    </View>
+                    <ImageBackground
+                        source={increment_container_path}
+                        style={increment_container}
+                    >
+                        <TouchableOpacity>
+                            <Text style={increment_btn_text}>+</Text>
+                        </TouchableOpacity>
+                    </ImageBackground>
                 </View>
+                <TouchableOpacity style={add_to_cart_btn}>
+                    <View style={cart_icon}>
+                        <ShoppingCartIcon color={COLORS.black}/>
+                    </View>
+                    <Text style={add_cart_btn_text}>Add To Cart</Text>
+                    <Text style={add_cart_btn_price}>&#8369; {item.price}</Text>
+                </TouchableOpacity>
             </View>
         </View>
     )

@@ -14,9 +14,7 @@ export const plant_card_styling = StyleSheet.create({
         shadowColor: "#000", // for iOS
         shadowOffset: { width: 0, height: 2 }, // for iOS
         shadowOpacity: 0.25, // for iOS
-        shadowRadius: 5.84, // for iOS
         width: Platform.OS === "ios" ? 275 : 250,
-        marginHorizontal: 30
     },
     image_container:{
         alignItems: "center",
@@ -55,6 +53,10 @@ export const plant_card_styling = StyleSheet.create({
         color: COLORS.white,
         fontFamily: FONT.satoshi_regular,
         fontSize: 18,
-    }
+    },
+    plant_card_carousel_view:{
+        paddingBottom: 25,
+    },
+
 });
   

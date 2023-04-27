@@ -4,11 +4,11 @@ import { COLORS, FONT } from "../../../_constants/constants.styles";
 export const header_styles = StyleSheet.create({
     header_container: (screen) => ( {
         alignItems: "center", 
+        backgroundColor: screen === "dashboard"? COLORS.secondary : COLORS.white,
         flexDirection: "row",
         justifyContent: "space-between",
         paddingHorizontal: 24,
         paddingTop: 25,
-        backgroundColor: screen === "dashboard"? COLORS.secondary : COLORS.white,
     }), 
     header_title: {
         flexWrap: "wrap",

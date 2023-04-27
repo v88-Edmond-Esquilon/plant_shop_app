@@ -4,54 +4,105 @@ import { COLORS, FONT } from "../../../_constants/constants.styles";
 
 export const plant_styling = StyleSheet.create({
     content_container: {
-        height: "100%",
-
+        alignItems:"center",
         backgroundColor: COLORS.white,
-        position: "relative",
+        height: "100%",
         justifyContent: "center",
-        alignItems:"center"
+        position: "relative",
     },
     plant_type_text: {
-        fontSize: 147,
-        position: "absolute",
-        top: "5%",
-        opacity: 0.3,
         color: COLORS.primary,
         fontFamily: FONT.satoshi_bold,
+        fontSize: 147,
+        opacity: 0.3,
+        position: "absolute",
+        top: "5%",
         zIndex: -100,
     },
     image_container: {
-        width: 170,
-        height: 170,
         borderRadius: 100,
+        height: 170,
         position: "absolute",
-        top: "20%"
-
+        top: "20%",
+        width: 170,
     },
     plant_image: {
-        width: 280,
-        height: 280,
+        height: 180,
         position: "absolute",
-        top: "9%",
-        resizeMode: "cover"
+        resizeMode: "center",
+        top: Platform.OS === "ios"? "20%" : "19%",
+        width: 150,
     },
     item_description: {
+        color: "#8B8B8B",
+        fontFamily: FONT.satoshi_italic,
+        marginTop: Platform.OS === "ios"? 130 : 0,
+        position: "absolute",
         textAlign: "center",
         width: 300,
-        fontFamily: FONT.satoshi_italic,
-        color: "#8B8B8B",
-        marginTop: Platform.OS === "ios"? 130 : 150
     },
     controls_container: {
-     
-        borderWidth: 1,
-        borderColor: "black",
-     
         alignItems: "center",
+        flexDirection: "row",
+        height: Platform.OS === "ios"? 220 : 180,
         justifyContent: "space-between",
-        height: 220
+        marginTop: Platform.OS === "ios"? 250 : 250,
+        width: "100%",
     },
     quantity_text: {
-
+        fontFamily: FONT.satoshi_bold,
+        fontSize: 102,
+    },
+    increment_container: {
+        alignItems: "center",
+        height: 220,
+        justifyContent: "center",
+        width: 96,
+    },
+    decrement_container: {
+        alignItems: "center",
+        height: 220,
+        justifyContent: "center",
+        width: 96,
+    },
+    decrement_btn_text: {
+        fontFamily: FONT.satoshi_bold,
+        fontSize: 50,
+        marginBottom: 50,
+    },
+    increment_btn_text: {
+        fontFamily: FONT.satoshi_bold,
+        fontSize: 50,
+        marginBottom: 15,
+    },
+    add_to_cart_btn: {
+        alignItems: "center",
+        backgroundColor: "black",
+        borderRadius: 42,
+        flexDirection: "row",
+        height: 82, 
+        padding: 10,
+        width: Platform.OS === "ios"? 382 : 310,
+    },
+    cart_icon: {
+        alignItems: "center",
+        backgroundColor: COLORS.primary,
+        borderRadius: 100,
+        height: 60 ,
+        justifyContent: "center",
+        width: 60,
+    },
+    add_cart_btn_text: {
+        color: COLORS.white,
+        fontFamily: FONT.satoshi_bold,
+        fontSize: 18,
+        marginLeft: 10,
+    },
+    add_cart_btn_price: {
+        color: COLORS.white,
+        fontFamily: FONT.satoshi_bold,
+        fontSize: 18,
+        marginLeft: "auto",
+        marginRight: 10,
     }
 });

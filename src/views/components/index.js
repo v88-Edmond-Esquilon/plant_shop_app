@@ -1,10 +1,12 @@
 import Header from "./Header/Header";
-import PlantCard from "./Plant_card/PlantCard";
+import PlantCardCarousel from "./Plant_card/PlantCardCarousel";
 import Chips from "./Chips/Chips";
 import DashboardFooter from "./Dashboard_Footer/DashboardFooter";
+import CartItem from "./Cart_item/CartItem";
 export {
     Header,
-    PlantCard,
+    PlantCardCarousel,
     Chips,
     DashboardFooter,
+    CartItem
 };
