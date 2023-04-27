@@ -56,6 +56,8 @@ export const plant_card_styling = StyleSheet.create({
     },
     plant_card_carousel_view:{
         paddingBottom: 25,
+        justifyContent: "center",
+        paddingHorizontal: Platform.OS === "ios"? 230 : 195
     },
 
 });
