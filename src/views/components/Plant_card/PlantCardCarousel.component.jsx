@@ -1,5 +1,12 @@
 /** React Native */
-import { View, Text, Image, TouchableOpacity, Dimensions, Platform } from "react-native";
+import { 
+        View,
+        Text, 
+        Image,
+        TouchableOpacity,
+        Dimensions, 
+        Platform,
+    } from "react-native";
 /** React */
 import React from "react";
 /** Plugin */
@@ -7,11 +14,13 @@ import { useNavigation } from "@react-navigation/native";
 import { ShoppingCartIcon } from "react-native-heroicons/outline";
 import Carousel from 'react-native-reanimated-carousel';
 import { useSharedValue } from "react-native-reanimated";
+/** Constants */
+import {PLANT_TYPES} from "../../../_constants/constants"
 /** Styling */
-import { plant_card_styling } from "./plantcardcarousel.styles";
+import { plant_card_styling } from "./plantcardcarousel.component.styles";
 import { COLORS } from "../../../_constants/constants.styles";
 /** Redux */
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import { PlantActions } from "../../../_actions/plant.actions";
 
 const { plant_card_container, image_container, image, item_name,
@@ -20,16 +29,17 @@ const { plant_card_container, image_container, image, item_name,
     } = plant_card_styling;
 
 
-
-
-
 const PlantCardRender = ({ plant_details, index } ) => {
     const navigation = useNavigation();
     const dispatch = useDispatch();
 
     const onAddToCart = () => {
         navigation.navigate("Plant");
-        dispatch(PlantActions.setSelectedPlant(plant_details?.id));
+        dispatch(PlantActions.setSelectedPlant({ 
+            id: plant_details?.id,
+            action_type: "get_plant",
+            data_origin: PLANT_TYPES,
+        }));
     }
 
     return (
@@ -42,44 +52,43 @@ const PlantCardRender = ({ plant_details, index } ) => {
             <TouchableOpacity style={add_to_cart_btn} onPress={() => onAddToCart()}>
                 <ShoppingCartIcon color={COLORS.primary} style={{ marginRight: 5}}/>
                 <Text style={add_cart_label_btn}>Add to Cart</Text>
-                <Text style={[add_cart_label_btn, {marginLeft: "auto"}]}> &#8369;{plant_details.price}</Text>
+                <Text style={[add_cart_label_btn, {marginLeft: "auto"}]}>
+                     &#8369;{plant_details.price}
+                </Text>
             </TouchableOpacity>
         </View>
     )
 }
-
 
 const PlantCardCarousel = ({ selected_plant_type }) => {
     const screen_width = Dimensions.get('window').width;
     const platform_value_screen = Platform.OS === 'ios' ? 120 : 90;
     const active_item_index = useSharedValue(0);
     
-
-    console.log(active_item_index.value," from carousel");
     return (
         <View>
             <Carousel
                 loop
-                width={screen_width - platform_value_screen}
-                height={Platform.OS === 'ios' ? 482 : 420}
                 autoPlay={true}
-                data={selected_plant_type?.items}
+                mode="parallax"
                 autoPlayInterval={2000}
                 scrollAnimationDuration={1000}
+                width={screen_width - platform_value_screen}
+                style={plant_card_carousel_view}
+                snapEnabled={true}
+                height={Platform.OS === 'ios' ? 482 : 420}
+                modeConfig={{
+                    parallaxScrollingScale: 1,
+                    parallaxAdjacentItemScale: Platform.OS === 'ios' ? 0.9 : 0.8,
+                }}
+                data={selected_plant_type?.items}
                 renderItem={({ item, index }) => (
                     <PlantCardRender
                         plant_details={item}
                         index={index}
                     />
                 )}
-                mode="parallax"
-                modeConfig={{
-                    parallaxScrollingScale: 1,
-                    parallaxAdjacentItemScale: Platform.OS === 'ios' ? 0.9 : 0.8,
-                }}
-                snapEnabled={true}
-                style={plant_card_carousel_view}
-                onSnapToItem={(index) => console.log("active item index", index)}
+                // onSnapToItem={(index) => console.log("active item index", index)}
             />
         </View>
     );

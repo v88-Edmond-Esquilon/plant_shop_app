@@ -11,11 +11,15 @@ export const PlantManagementReducer = createSlice({
     initialState,
     reducers: {
         setSelectedPlant: PlantServices.setSelectedPlant,
+        decrementSelectedPlantQuantity: PlantServices.decrementSelectedPlantQuantity,
+        incrementSelectedPlantQuantity: PlantServices.incrementSelectedPlantQuantity,
     }
 });
 
 export const {
-    setSelectedPlant
+    setSelectedPlant,
+    decrementSelectedPlantQuantity,
+    incrementSelectedPlantQuantity
 } = PlantManagementReducer.actions;
 
 export default PlantManagementReducer.reducer;

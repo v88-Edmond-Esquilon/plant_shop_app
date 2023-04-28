@@ -1,14 +1,25 @@
-import { View, Text, Pressable, TouchableOpacity } from "react-native";
+/** React Native */
+import { 
+        View,
+        Text, 
+        TouchableOpacity
+    } from "react-native";
+/** React */
 import React from "react";
-import { header_styles } from "./header.styles";
-import { COLORS } from "../../../_constants/constants.styles";
-import { useFonts } from "expo-font";
+/** Styling */
+import { header_styles } from "./header.component.styles";
+/** Plugin */
 import { Bars3Icon } from "react-native-heroicons/outline";
 
+const { 
+        header_container,
+        header_title,
+        header_bold,
+        burger_btn,
+    } = header_styles;
 
 const Header = ({ title, screen }) => {
-    const { header_container, header_title, header_bold, burger_btn} = header_styles;
-   
+  
     return (
         <View style={header_container(screen)}>
             <Text style={header_title}>

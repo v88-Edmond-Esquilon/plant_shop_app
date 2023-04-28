@@ -1,6 +1,6 @@
-import Plant from "./plant/Plant";
-import Dashboard from "./dashboard/Dashboard";
-import Cart from "./cart/Cart";
+import Plant from "./Plant/Plant";
+import Dashboard from "./Dashboard/Dashboard";
+import Cart from "./Cart/Cart";
 
 
 export {

@@ -32,31 +32,31 @@ import {
         cart_content_path,
         cart_controls_path,
     } from "../../../_constants/constants";
+/** Redux */
+import { useSelector, useDispatch } from "react-redux";
+import { CartActions } from "../../../_actions/cart.actions";
 /** Styling */
 import { cart_styles } from "./cart.styles";
 import { FONT } from "../../../_constants/constants.styles";
 
+const { cart_container, cart_list_container, cart_controls_container,
+    cart_list_item, cart_controls, delivery_fee_text,
+    total_amount_text, swipe_payment_button, payment_swiper,
+    swiper_image, swiper_payment_text
+} = cart_styles;
+
 const Cart = () => {
     const navigation = useNavigation();
-    const { cart_container, cart_list_container, cart_controls_container,
-            cart_list_item, cart_controls, delivery_fee_text,
-            total_amount_text, swipe_payment_button, payment_swiper,
-            swiper_image, swiper_payment_text
-        } = cart_styles;
     const slider_x_axis = useSharedValue(0);
+    const dispatch = useDispatch();
     const slider_btn_container_width = Platform.OS === "android"? 259 : 342;
     let [is_paid, setIsPaid] = useState(false);
+    const { cart: { cart_contents }} = useSelector(state => state);
 
-    const sample_cart_data = [
-        {key: 1, price: 120, quantity: 4, plant_name: "Sample Plant1", img: require("../../../../assets/images/plants/pothos.png")},
-        {key: 2, price: 130, quantity: 5, plant_name: "Sample Plant2", img: require("../../../../assets/images/plants/pothos.png")},
-        {key: 3, price: 140, quantity: 6, plant_name: "Sample Plant3", img: require("../../../../assets/images/plants/pothos.png")},
-        {key: 4, price: 150, quantity: 7, plant_name: "Sample Plant4", img: require("../../../../assets/images/plants/pothos.png")},
-        {key: 5, price: 150, quantity: 7, plant_name: "Sample Plant4", img: require("../../../../assets/images/plants/pothos.png")},
-        {key: 6, price: 150, quantity: 7, plant_name: "Sample Plant4", img: require("../../../../assets/images/plants/pothos.png")},
-        {key: 7, price: 150, quantity: 7, plant_name: "Sample Plant4", img: require("../../../../assets/images/plants/pothos.png")},
-    ]
-
+    const total_price = cart_contents.reduce((acc, item) => {
+        return acc + item.item_price;
+    }, 0).toFixed(2);
+      
      useLayoutEffect(() => {
         navigation.setOptions({
             headerShown: false
@@ -66,13 +66,31 @@ const Cart = () => {
     const random_delivery_fee = useMemo(() => {
         return (Math.random() * (50.99 - 12.99) + 12.99).toFixed(2);
     }, []);
-      
 
+    const paymentSuccess = () => {
+        let count = 25;
+
+        dispatch(CartActions.onPaymentSuccess());
+
+        alert('Payment Successful');
+       
+        const interval = setInterval(() => {
+            count--;
+
+            if (count === 0) {
+                clearInterval(interval);
+                setIsPaid(false);
+                slider_x_axis.value = -1;
+            }
+        }, 100);
+    };
+      
     const slideGesture = useAnimatedGestureHandler({
         onActive: (event) => {
             slider_x_axis.value = event.translationX;
+
             if(slider_x_axis.value > slider_btn_container_width / 2 - 10){
-                slider_x_axis.value = Platform.OS === "android"? 160 : 213;
+                slider_x_axis.value = (Platform.OS === "android") ? 160 : 213;
             } else if(slider_x_axis.value < 0) {
                 slider_x_axis.value = -1;
             }
@@ -89,7 +107,7 @@ const Cart = () => {
                     /** Payment Success */
                     slider_value = platform_value;
                     runOnJS(setIsPaid)(true);
-
+                    runOnJS(paymentSuccess)();
                     break;
             
                 case gesture_velocity < -platform_velocity_value:
@@ -102,6 +120,7 @@ const Cart = () => {
                     /** Payment Success */
                     slider_value = platform_value;
                     runOnJS(setIsPaid)(true);
+                    runOnJS(paymentSuccess)();
                     break;
             
                 default:
@@ -112,7 +131,6 @@ const Cart = () => {
             
             slider_x_axis.value = withTiming(slider_value, {easing: Easing.linear});
         }
-          
     });
 
     const payment_slider_animation = useAnimatedStyle(() => ({
@@ -124,23 +142,25 @@ const Cart = () => {
             <ImageBackground source={cart_content_path} style={cart_list_container}>
                 <View style={cart_list_item}>
                     <FlatList
-                        data={sample_cart_data}
                         horizontal={false}
                         alwaysBounceVertical={true}
                         showsVerticalScrollIndicator={false}
-                        keyExtractor={item => item.key}
-                        renderItem={({ item, index }) => <CartItem item_details={item} is_last_item={index === sample_cart_data.length - 1} />}
+                        keyExtractor={item => item.id}
+                        data={cart_contents}
+                        renderItem={({ item, index }) => <CartItem item_details={item} is_last_item={index === cart_contents.length - 1} />}
                     />
                 </View>
                 <View style={cart_controls_container}>
                     <ImageBackground source={cart_controls_path} style={cart_controls}>
                         <View style={delivery_fee_text}>
                             <Text style={{ fontFamily: FONT.satoshi_regular, fontSize: 16}}>Delivery Amount</Text>
-                            <Text style={{ fontFamily: FONT.satoshi_bold, fontSize: 20}}>&#8369; {random_delivery_fee}</Text>
+                            <Text style={{ fontFamily: FONT.satoshi_bold, fontSize: 20}}>
+                                &#8369; {cart_contents.length? random_delivery_fee : "0.00"}
+                            </Text>
                         </View>
                         <View style={total_amount_text}>
                             <Text style={{ fontFamily: FONT.satoshi_bold, fontSize: 18}}>Total Amount</Text>
-                            <Text style={{ fontFamily: FONT.satoshi_bold, fontSize: 24}}>&#8369; 99.90</Text>
+                            <Text style={{ fontFamily: FONT.satoshi_bold, fontSize: 24}}>&#8369; {total_price}</Text>
                         </View>
                         <View style={swipe_payment_button}>
                             <Text style={swiper_payment_text(is_paid)}>{`${is_paid? "Paid Successfully" : "Make Payment"}`}</Text>

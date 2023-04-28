@@ -65,15 +65,19 @@ export const plant_styling = StyleSheet.create({
         justifyContent: "center",
         width: 96,
     },
-    decrement_btn_text: {
-        fontFamily: FONT.satoshi_bold,
-        fontSize: 50,
-        marginBottom: 50,
+    decrement_btn: {
+        alignItems: "center",
+        borderRadius: 100,
+        height: 50,
+        justifyContent: "center",
+        width: 50,
     },
-    increment_btn_text: {
-        fontFamily: FONT.satoshi_bold,
-        fontSize: 50,
-        marginBottom: 15,
+    increment_btn: {
+        alignItems: "center",
+        borderRadius: 100,
+        height: 50,
+        justifyContent: "center",
+        width: 50,
     },
     add_to_cart_btn: {
         alignItems: "center",

@@ -17,9 +17,9 @@ export const cart_item_style = StyleSheet.create({
     },
     item_image: {
         height: 70,
-        left: -5,
+        left: 0,
         position: "absolute",
-        resizeMode: "cover",
+        resizeMode: "center",
         width: 80,
     },
     item_text_name: {
@@ -29,8 +29,10 @@ export const cart_item_style = StyleSheet.create({
     item_text_price: {
         backgroundColor: COLORS.white,
         borderRadius: 24,
-        left: Platform.OS === "ios" ? 180 : 150,
+        marginLeft: "auto",
         paddingHorizontal: 18,
         paddingVertical: 10,
+        position:"relative",
+        maxWidth: 120
     }
 });

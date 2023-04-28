@@ -5,7 +5,6 @@ import React, { useLayoutEffect } from "react";
 import { View,
         Text,
         ScrollView,
-        FlatList,
         Platform,
         useWindowDimensions
     } from "react-native";
@@ -16,7 +15,7 @@ import { Header,
         DashboardFooter
     } from "../../components";
 /** Screen */
-import Cart from "../cart/Cart";
+import Cart from "../Cart/Cart";
 /** Plugin */
 import { useNavigation } from "@react-navigation/native";
 import { PanGestureHandler } from "react-native-gesture-handler";
@@ -30,8 +29,7 @@ import { LinearGradient } from "expo-linear-gradient";
 /** Constants */
 import { PLANT_TYPES } from "../../../_constants/constants";
 /** Redux */
-import { useSelector, useDispatch } from "react-redux";
-import { DashboardActions} from "../../../_actions/dashboard.actions";
+import { useSelector } from "react-redux";
 /** Styling */
 import { dashboard_styles } from "./dashboard.style";
 import { COLORS, FONT } from "../../../_constants/constants.styles";
@@ -45,7 +43,7 @@ const Dashboard = () => {
     const navigation = useNavigation();
     const { height } = useWindowDimensions();
     const dashboard_y_axis = useSharedValue(height);
-    const { dashboard: { selected_plant_type }} = useSelector(state => state);
+    const { dashboard: { selected_plant_type }, cart: { cart_contents }} = useSelector(state => state);
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -112,17 +110,27 @@ const Dashboard = () => {
                             <Chips key={plant.id} plant={plant}/>
                         ))}
                     </ScrollView>
-                    <Text style={collections_text}>{selected_plant_type.name} Collections</Text>
+                    <Text style={collections_text}>
+                        {selected_plant_type.name} Collections
+                    </Text>
                     <PlantCardCarousel selected_plant_type={selected_plant_type}/>
                     <PanGestureHandler onGestureEvent={swipeUpGesture}>
                         <Animated.View style={{ alignItems: "center"}}>
                             <LinearGradient colors={[ COLORS.secondary, "white"]} style={footer}>
-                                <View style={footer_notch_top} hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}/>
+                                <View 
+                                    style={footer_notch_top} 
+                                    hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
+                                />
                                 <DashboardFooter/>
                                 <View style={cart_header}>
                                     <Text style={{ fontFamily: FONT.satoshi_bold, fontSize: 32}}>Cart</Text>
-                                    <View style={cart_header_counter} hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}>
-                                        <Text style={{ fontFamily: FONT.satoshi_bold, fontSize: 24}}>0</Text>
+                                    <View 
+                                        style={cart_header_counter}
+                                        hitSlop={{top: 20, bottom: 20, left: 20, right: 20}}
+                                    >
+                                        <Text style={{ fontFamily: FONT.satoshi_bold, fontSize: 24}}>
+                                            {cart_contents.length}
+                                        </Text>
                                     </View>
                                 </View>
                             </LinearGradient>

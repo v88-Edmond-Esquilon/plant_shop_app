@@ -35,5 +35,13 @@ export const dashboard_footer_styles = StyleSheet.create({
         position: "relative",
         resizeMode: "cover",
         width: 50,
-    }
+    },
+    image_stack_container: {
+        flexDirection: "row",
+        marginLeft: "auto",
+        marginRight: 24,
+        maxWidth: 155,
+        overflow: "hidden",
+        
+    },
 });
